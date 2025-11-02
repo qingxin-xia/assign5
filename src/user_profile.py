@@ -100,11 +100,11 @@ class UserProfile:
         with open(json_file, 'r') as file_handle:
             json_content = json.load(file_handle)
         return cls(
-            name=json_content['name'],
-            email=json_content['email'],
-            password=json_content['password'],
-            dob=json_content['dob'],
-            location=Location(**json_content['location'])
+            name=json_content["name"],
+            email=json_content["email"],
+            password=json_content["password"],
+            dob=json_content["dob"],
+            location=Location(**json_content["location"])
         )
         
     def to_json(self, json_file: str) -> None:
@@ -113,14 +113,14 @@ class UserProfile:
 
     def to_dict(self) -> dict:
         profile_dict = {
-            'name': self.name,
-            'email': self.email,
-            'password': self.password,
-            'dob': self.dob,
-            'location': {
-                'city': self.location.city,
-                'state': self.location.state,
-                'country': self.location.country
+            "name": self.name,
+            "email": self.email,
+            "password": self.password,
+            "dob": self.dob,
+            "location": {
+                "city": self.location.city,
+                "state": self.location.state,
+                "country": self.location.country
             }
         }
         return profile_dict
