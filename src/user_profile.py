@@ -15,6 +15,14 @@ class UserProfile:
         
     @staticmethod
     def valid_name(name: str) -> bool:
+        """Validate that name has 2-3 parts, each starting with uppercase letter.
+        
+        Args:
+            name: The name string to validate
+            
+        Returns:
+            True if name is valid, False otherwise
+        """
         name_parts = name.strip().split()
         if 2 <= len(name_parts) <= 3:
             for name_part in name_parts:
@@ -26,17 +34,42 @@ class UserProfile:
     
     @staticmethod
     def valid_email(email: str) -> bool:
+        """Validate email format using regex pattern.
+        
+        Args:
+            email: The email string to validate
+            
+        Returns:
+            True if email format is valid, False otherwise
+        """
         email_pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
         return re.match(email_pattern, email) is not None
     
-    # Validate password format
     @staticmethod
     def valid_password(password: str) -> bool:
+        """Validate password meets security requirements.
+        
+        Password must contain: uppercase, lowercase, digit, special char, min 8 chars.
+        
+        Args:
+            password: The password string to validate
+            
+        Returns:
+            True if password meets requirements, False otherwise
+        """
         regex = r'^(?=^[A-Z])(?=.*[a-z]?)(?=.*\d)(?=.*[@$!%*?&])[A-z\d@$!%*?&]{8,}$'
         return re.match(regex, password) is not None
     
     @staticmethod
     def valid_dob(dob: str) -> bool:
+        """Validate date of birth format (YYYY-MM-DD or MM/DD/YYYY).
+        
+        Args:
+            dob: The date of birth string to validate
+            
+        Returns:
+            True if date format is valid, False otherwise
+        """
         try:
             datetime.strptime(dob, "%Y-%m-%d")
             return True
