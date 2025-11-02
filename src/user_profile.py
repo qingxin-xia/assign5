@@ -19,7 +19,7 @@ class UserProfile:
         if 2 <= len(parts) <= 3:
             for part in parts:
                 regex = r"^[A-Z][a-z]*$"
-                if not re.match(regex, part):
+                if re.fullmatch(regex, part) is None:
                     return False
             return True
         return False
@@ -27,12 +27,12 @@ class UserProfile:
     @staticmethod
     def valid_email(email: str) -> bool:
         regex = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-        return re.fullmatch(regex, email) is not None
+        return re.match(regex, email) is not None
     
     @staticmethod
     def valid_password(password: str) -> bool:
         regex = r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$'
-        return re.fullmatch(regex, password) is not None
+        return re.match(regex, password) is not None
     
     @staticmethod
     def valid_dob(dob: str) -> bool:
