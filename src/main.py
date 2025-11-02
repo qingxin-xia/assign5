@@ -48,7 +48,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         raise SystemExit("No valid profiles loaded from input file.")
 
     sorted_profiles = _sort_profiles(manager, args.sort)
-    output_list = [p.to_dict() for p in sorted_profiles]
+    output_list = []
+    for profile in sorted_profiles:
+        output_list.append(profile.to_dict())
     _write_output(output_list, args.output)
 
     return 0
