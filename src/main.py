@@ -51,7 +51,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     sorted_profiles = _sort_profiles(manager, args.sort)
     output_list = []
     for profile in sorted_profiles:
-        output_list.append(profile.to_dict())
+        profile_dict = profile.to_dict()
+        output_list.append(profile_dict)
     _write_output(output_list, args.output)
 
     return 0

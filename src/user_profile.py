@@ -54,6 +54,12 @@ class UserProfile:
     # Validate all profile fields
     def validate(self) -> bool:
         validation_errors = {}
+        # Check date of birth validity
+        if not self.valid_dob(self.dob):
+            validation_errors["dob"] = ["Invalid date of birth format"]
+        # Check location validity
+        if not self.valid_location(self.location):
+            validation_errors["location"] = ["Invalid location format"]
         # Check name validity
         if not self.valid_name(self.name):
             validation_errors["name"] = ["Invalid name format"]
@@ -63,12 +69,6 @@ class UserProfile:
         # Check password validity
         if not self.valid_password(self.password):
             validation_errors["password"] = ["Invalid password format"]
-        # Check date of birth validity
-        if not self.valid_dob(self.dob):
-            validation_errors["dob"] = ["Invalid date of birth format"]
-        # Check location validity
-        if not self.valid_location(self.location):
-            validation_errors["location"] = ["Invalid location format"]
         if validation_errors:
             print(f"validation failed for {', '.join(validation_errors.keys())}")
             return False
