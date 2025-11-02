@@ -26,16 +26,16 @@ class UserProfileManager:
         raise ValueError(f"Failed to remove profile for '{email}'")
     
     def sort_profiles_by_age(self):
-        return sorted(self.user_profiles.values(), key=lambda x: x.get_age(), reverse=True)
+        return sorted(self.user_profiles.values(), key=lambda p: p.get_age(), reverse=True)
     
     def sort_profiles_by_name(self):
-        return sorted(self.user_profiles.values(), key=lambda x: x.name)
+        return sorted(self.user_profiles.values(), key=lambda p: p.name)
     
     def sort_profiles_by_email(self):
-        return sorted(self.user_profiles.values(), key=lambda x: x.email)
+        return sorted(self.user_profiles.values(), key=lambda p: p.email)
     
     def sort_profiles_by_location(self):
-        return sorted(self.user_profiles.values(), key=lambda x: (x.location.country, x.location.state, x.location.city))
+        return sorted(self.user_profiles.values(), key=lambda p: (p.location.country, p.location.state, p.location.city))
     
     def save_profiles_to_json(self, json_file: str):
         profile_list = []
@@ -64,17 +64,17 @@ class UserProfileManager:
         else:
             print(f"ERROR: JSON file must contain a dictionary or list")
             return
-        for profile_data in profile_items:
+        for item_data in profile_items:
             try:
-                profile = UserProfile(
-                    name=profile_data['name'],
-                    email=profile_data['email'],
-                    password=profile_data['password'],
-                    dob=profile_data['dob'],
-                    location=Location(**profile_data['location'])
+                user_profile = UserProfile(
+                    name=item_data['name'],
+                    email=item_data['email'],
+                    password=item_data['password'],
+                    dob=item_data['dob'],
+                    location=Location(**item_data['location'])
                 )
                 try:
-                    self.add_profile(profile)
+                    self.add_profile(user_profile)
                 except ValueError:
                     pass
             except KeyError as e:
