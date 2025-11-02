@@ -18,24 +18,30 @@ class UserProfileManager:
             return
         raise ValueError(f"Failed to add profile for '{profile.email}'")
     
+    # Get a profile by email
     def get_profile(self, email: str) -> UserProfile | None:
         return self.user_profiles.get(email, None)
     
+    # Remove a profile by email
     def remove_profile(self, email: str) -> None:
         if email in self.user_profiles:
             del self.user_profiles[email]
             return
         raise ValueError(f"Failed to remove profile for '{email}'")
     
+    # Sort profiles by age (descending)
     def sort_profiles_by_age(self):
         return sorted(self.user_profiles.values(), key=lambda p: p.get_age(), reverse=True)
     
+    # Sort profiles by name
     def sort_profiles_by_name(self):
         return sorted(self.user_profiles.values(), key=lambda p: p.name)
     
+    # Sort profiles by email
     def sort_profiles_by_email(self):
         return sorted(self.user_profiles.values(), key=lambda p: p.email)
     
+    # Sort profiles by location
     def sort_profiles_by_location(self):
         return sorted(self.user_profiles.values(), key=lambda p: (p.location.country, p.location.state, p.location.city))
     
