@@ -48,7 +48,7 @@ class UserProfile:
     
     @staticmethod
     def valid_email(email: str) -> bool:
-        """Validate email format using regex pattern.
+        """Validate email format.
         
         Args:
             email: The email string to validate
@@ -107,10 +107,7 @@ class UserProfile:
         return location.valid_location()
 
     def validate(self) -> bool:
-        """Validate all profile fields and collect any validation errors.
-        
-        Checks: date of birth, location, name, email, and password.
-        Prints error messages if validation fails.
+        """Validate all profile fields.
         
         Returns:
             True if all fields are valid, False otherwise
