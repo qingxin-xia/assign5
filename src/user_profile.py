@@ -50,16 +50,22 @@ class UserProfile:
     def valid_location(location: Location) -> bool:
         return location.valid_location()
 
+    # Validate all profile fields
     def validate(self) -> bool:
         validation_errors = {}
+        # Check name validity
         if not self.valid_name(self.name):
             validation_errors["name"] = ["Invalid name format"]
+        # Check email validity
         if not self.valid_email(self.email):
             validation_errors["email"] = ["Invalid email format"]
+        # Check password validity
         if not self.valid_password(self.password):
             validation_errors["password"] = ["Invalid password format"]
+        # Check date of birth validity
         if not self.valid_dob(self.dob):
             validation_errors["dob"] = ["Invalid date of birth format"]
+        # Check location validity
         if not self.valid_location(self.location):
             validation_errors["location"] = ["Invalid location format"]
         if validation_errors:
@@ -67,10 +73,13 @@ class UserProfile:
             return False
         return True
     
+    # Extract date from string in multiple formats
     def extract_date(self, date_str: str) -> datetime:
+        # Try YYYY-MM-DD format first
         try:
             return datetime.strptime(date_str, "%Y-%m-%d")
         except ValueError:
+            # Try MM/DD/YYYY format
             try:
                 return datetime.strptime(date_str, "%m/%d/%Y")
             except ValueError:
