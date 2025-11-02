@@ -46,7 +46,7 @@ class UserProfileManager:
         profile_list = []
         # Iterate through all profiles
         for user_profile in self.user_profiles.values():
-            profile_list.append({
+            profile_data = {
                 'name': user_profile.name,
                 'email': user_profile.email,
                 'password': user_profile.password,
@@ -56,7 +56,8 @@ class UserProfileManager:
                     'state': user_profile.location.state,
                     'country': user_profile.location.country
                 }
-            })
+            }
+            profile_list.append(profile_data)
         with open(json_file, 'w') as f:
             json.dump(profile_list, f, indent=4)
     
