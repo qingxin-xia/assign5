@@ -8,6 +8,18 @@ from .user_manager import UserProfileManager
 
 
 def _sort_profiles(manager: UserProfileManager, key: str):
+    """Sort profiles by the specified key.
+    
+    Args:
+        manager: UserProfileManager instance
+        key: Sort key ("age", "name", "email", or "location")
+        
+    Returns:
+        List of sorted UserProfile objects
+        
+    Raises:
+        SystemExit: If sort key is invalid
+    """
     if key == "age":
         return manager.sort_profiles_by_age()
     elif key == "name":
@@ -21,6 +33,12 @@ def _sort_profiles(manager: UserProfileManager, key: str):
 
 
 def _write_output(obj, output_path: Optional[str]):
+    """Write output to file or stdout.
+    
+    Args:
+        obj: Object to serialize as JSON
+        output_path: Optional path to output file (None = stdout)
+    """
     if output_path:
         output_file_path = Path(output_path)
         with output_file_path.open(mode="w") as file_handle:
@@ -31,6 +49,19 @@ def _write_output(obj, output_path: Optional[str]):
 
 
 def main(argv: Optional[List[str]] = None) -> int:
+    """Main entry point for user profile processing.
+    
+    Loads profiles from JSON, sorts them, and outputs results.
+    
+    Args:
+        argv: Optional command-line arguments (defaults to sys.argv)
+        
+    Returns:
+        Exit code (0 for success)
+        
+    Raises:
+        SystemExit: If no valid profiles are loaded
+    """
     parser = argparse.ArgumentParser(description="User profiles processor")
     parser.add_argument("--input", "-i", required=True, help="Path to input JSON (single user or list)")
     parser.add_argument("--output", "-o", help="Path to write output JSON (defaults to stdout)")

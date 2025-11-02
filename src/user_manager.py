@@ -87,10 +87,14 @@ class UserProfileManager:
         """
         return sorted(self.user_profiles.values(), key=lambda p: (p.location.country, p.location.state, p.location.city))
     
-    # Save all profiles to a JSON file
     def save_profiles_to_json(self, json_file: str):
+        """Save all profiles to a JSON file.
+        
+        Args:
+            json_file: Path to output JSON file
+        """
         profile_list = []
-        # Iterate through all profiles
+        # Convert each profile to dictionary format
         for user_profile in self.user_profiles.values():
             profile_data = {
                 'name': user_profile.name,
@@ -107,8 +111,15 @@ class UserProfileManager:
         with open(json_file, mode='w') as f:
             json.dump(profile_list, f, indent=4)
     
-    # Load profiles from a JSON file
     def load_profiles_from_json(self, json_file: str):
+        """Load profiles from a JSON file.
+        
+        Supports both single profile object and list of profiles.
+        Invalid profiles are skipped with error messages.
+        
+        Args:
+            json_file: Path to JSON file containing profile(s)
+        """
         with open(json_file, mode='r') as input_file:
             loaded_data = json.load(input_file)
         # Handle both single dict and list of dicts
@@ -119,6 +130,7 @@ class UserProfileManager:
         else:
             print(f"ERROR: JSON file must contain a dictionary or list")
             return
+        # Process each profile item
         for profile_item in profile_items:
             try:
                 user_profile = UserProfile(
