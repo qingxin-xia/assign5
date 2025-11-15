@@ -114,6 +114,9 @@ class UserProfileManager:
     def load_profiles_from_json(self, json_file: str):
         """Load profiles from a JSON file.
         
+        Supports both single profile object and list of profiles.
+        Invalid profiles are skipped with error messages.
+        
         Args:
             json_file: Path to JSON file containing profile(s)
         """
